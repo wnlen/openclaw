@@ -480,32 +480,6 @@ Many of the bundled provider plugins below already publish a default catalog.
 Use explicit `models.providers.<id>` entries only when you want to override the
 default base URL, headers, or model list.
 
-## Provider request proxy
-
-OpenClaw does not automatically apply `HTTP_PROXY` / `HTTPS_PROXY` environment variables to provider requests.
-
-If you run OpenClaw in a proxy-required environment (for example WSL, local proxy tools, or corporate networks), configure proxy behavior explicitly for the provider you use.
-
-Example:
-
-```json
-{
-  "models": {
-    "providers": {
-      "openai": {
-        "request": {
-          "proxy": {
-            "mode": "env-proxy"
-          }
-        }
-      }
-    }
-  }
-}
-```
-Add this under your OpenClaw configuration file, inside the relevant `models.providers.<provider>` entry.
-This is a provider-level setting and is not specific to OpenAI. Use the corresponding provider id under `models.providers.<provider>`.
-
 ### Moonshot AI (Kimi)
 
 Moonshot ships as a bundled provider plugin. Use the built-in provider by
