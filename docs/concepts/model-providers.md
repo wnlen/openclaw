@@ -866,7 +866,7 @@ Example:
 }
 ```
 
-This is a provider-level setting and is not specific to OpenAI. Use the corresponding provider id under `models.providers.<provider>`.
+This example uses OpenAI for illustration only. Support for `request.proxy` depends on the provider transport API used by the provider you configure.
 
 ## CLI examples
 
