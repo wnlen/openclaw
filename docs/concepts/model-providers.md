@@ -480,44 +480,6 @@ Many of the bundled provider plugins below already publish a default catalog.
 Use explicit `models.providers.<id>` entries only when you want to override the
 default base URL, headers, or model list.
 
-## Provider request proxy
-
-OpenClaw does not automatically apply `HTTP_PROXY` / `HTTPS_PROXY` environment variables to provider requests.
-
-If you run OpenClaw in a proxy-required environment (for example WSL, local proxy tools, or corporate networks), configure proxy behavior explicitly for the provider you use.
-
-If you define an explicit `models.providers.<provider>` entry, it must satisfy the provider schema for your current version. In practice, this usually means including the provider's `baseUrl` and `models` along with the proxy configuration.
-
-Example:
-
-```json
-{
-  "models": {
-    "providers": {
-      "openai": {
-        "baseUrl": "https://api.openai.com/v1",
-        "models": [
-          {
-            "id": "gpt-5.4",
-            "name": "gpt-5.4"
-          },
-          {
-            "id": "gpt-5.4-mini",
-            "name": "gpt-5.4-mini"
-          }
-        ],
-        "request": {
-          "proxy": {
-            "mode": "env-proxy"
-          }
-        }
-      }
-    }
-  }
-}
-```
-This is a provider-level setting and is not specific to OpenAI. Use the corresponding provider id under `models.providers.<provider>`.
-
 ### Moonshot AI (Kimi)
 
 Moonshot ships as a bundled provider plugin. Use the built-in provider by
@@ -866,6 +828,45 @@ Notes:
   headers.
 - If `baseUrl` is empty/omitted, OpenClaw keeps the default OpenAI behavior (which resolves to `api.openai.com`).
 - For safety, an explicit `compat.supportsDeveloperRole: true` is still overridden on non-native `openai-completions` endpoints.
+
+## Provider request proxy
+
+OpenClaw does not automatically apply `HTTP_PROXY` / `HTTPS_PROXY` environment variables to provider requests.
+
+If you run OpenClaw in a proxy-required environment (for example WSL, local proxy tools, or corporate networks), configure proxy behavior explicitly for the provider you use.
+
+If you define an explicit `models.providers.<provider>` entry, it must satisfy the provider schema for your current version. In practice, this usually means including the provider's `baseUrl` and `models` along with the proxy configuration.
+
+Example:
+
+```json
+{
+  "models": {
+    "providers": {
+      "openai": {
+        "baseUrl": "https://api.openai.com/v1",
+        "models": [
+          {
+            "id": "gpt-5.4",
+            "name": "gpt-5.4"
+          },
+          {
+            "id": "gpt-5.4-mini",
+            "name": "gpt-5.4-mini"
+          }
+        ],
+        "request": {
+          "proxy": {
+            "mode": "env-proxy"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+This is a provider-level setting and is not specific to OpenAI. Use the corresponding provider id under `models.providers.<provider>`.
 
 ## CLI examples
 
